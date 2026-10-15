@@ -49,7 +49,6 @@ export default function App() {
     setTareas(tareas.filter((t) => t.id !== id));
   };
 
-  // 🥇 Reto: Editar el título de una tarea
   const editarTarea = async (id, nuevoTitulo) => {
     await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
@@ -59,7 +58,6 @@ export default function App() {
     setTareas(tareas.map((t) => (t.id === id ? { ...t, titulo: nuevoTitulo } : t)));
   };
 
-  // 🥈 Reto: Eliminar todas las tareas completadas
   const eliminarCompletadas = async () => {
     const completadas = tareas.filter((t) => t.completada);
     for (const t of completadas) {
@@ -68,32 +66,25 @@ export default function App() {
     setTareas(tareas.filter((t) => !t.completada));
   };
 
-  // 🥉 Reto: Contador de tareas completadas
   const completadasCount = tareas.filter((t) => t.completada).length;
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '500px', margin: '0 auto' }}>
+    <div>
       <h1>Lista de Tareas</h1>
 
-      {/* 🥉 Reto: Contador */}
-      <p style={{ fontWeight: 'bold', color: '#555' }}>
-        {completadasCount} de {tareas.length} tareas completadas
-      </p>
+      <p>{completadasCount} de {tareas.length} tareas completadas</p>
 
-      <form onSubmit={agregarTarea} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+      <form onSubmit={agregarTarea}>
         <input
           type="text"
           value={nuevoTexto}
           onChange={(e) => setNuevoTexto(e.target.value)}
           placeholder="Nueva tarea..."
-          style={{ flex: 1, padding: '8px' }}
         />
-        <button type="submit" style={{ padding: '8px 16px', cursor: 'pointer' }}>
-          Agregar
-        </button>
+        <button type="submit">Agregar</button>
       </form>
 
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul>
         {tareas.map((t) => (
           <Tarea
             key={t.id}
@@ -105,20 +96,8 @@ export default function App() {
         ))}
       </ul>
 
-      {/* 🥈 Reto: Botón para eliminar completadas */}
       {completadasCount > 0 && (
-        <button
-          onClick={eliminarCompletadas}
-          style={{
-            marginTop: '15px',
-            backgroundColor: '#ff4d4d',
-            color: 'white',
-            border: 'none',
-            padding: '8px 14px',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
+        <button onClick={eliminarCompletadas} style={{ marginTop: '10px' }}>
           Eliminar completadas
         </button>
       )}

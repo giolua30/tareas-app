@@ -12,7 +12,7 @@ export function Tarea({ tarea, onToggle, onEliminar, onEditar }) {
   };
 
   return (
-    <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+    <li>
       <input
         type="checkbox"
         checked={tarea.completada}
@@ -31,11 +31,8 @@ export function Tarea({ tarea, onToggle, onEliminar, onEditar }) {
       ) : (
         <span
           onDoubleClick={() => setEditando(true)}
-          style={{
-            textDecoration: tarea.completada ? 'line-through' : 'none',
-            cursor: 'pointer'
-          }}
-          title="Haz doble clic para editar"
+          style={{ textDecoration: tarea.completada ? 'line-through' : 'none' }}
+          title="Doble clic para editar"
         >
           {tarea.titulo}
         </span>

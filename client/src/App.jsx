@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Tarea } from './components/Tarea';
+import './App.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api/tareas';
 
@@ -69,22 +70,27 @@ export default function App() {
   const completadasCount = tareas.filter((t) => t.completada).length;
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Lista de Tareas</h1>
 
-      <p>{completadasCount} de {tareas.length} tareas completadas</p>
+      <p className="contador-tareas">
+        {completadasCount} de {tareas.length} tareas completadas
+      </p>
 
-      <form onSubmit={agregarTarea}>
+      <form onSubmit={agregarTarea} className="tarea-form">
         <input
           type="text"
           value={nuevoTexto}
           onChange={(e) => setNuevoTexto(e.target.value)}
           placeholder="Nueva tarea..."
+          className="tarea-input"
         />
-        <button type="submit">Agregar</button>
+        <button type="submit" className="btn-agregar">
+          Agregar
+        </button>
       </form>
 
-      <ul>
+      <ul className="tarea-lista">
         {tareas.map((t) => (
           <Tarea
             key={t.id}
@@ -97,7 +103,7 @@ export default function App() {
       </ul>
 
       {completadasCount > 0 && (
-        <button onClick={eliminarCompletadas} style={{ marginTop: '10px' }}>
+        <button onClick={eliminarCompletadas} className="btn-eliminar-completadas">
           Eliminar completadas
         </button>
       )}

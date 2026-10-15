@@ -59,3 +59,31 @@ h1 { margin-bottom: 20px; }
 }
 
 .estado, .vacio { text-align: center; opacity: 0.7; margin-top: 20px; }
+
+
+/* Estilos extra para los retos */
+.input-editar {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #7c5cff;
+  background: #1e1e2e;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.btn-completadas {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-completadas:hover {
+  background: #e03a3a;
+}

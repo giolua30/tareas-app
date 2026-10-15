@@ -12,12 +12,12 @@ export function Tarea({ tarea, onToggle, onEliminar, onEditar }) {
   };
 
   return (
-    <li className={`tarea-item ${tarea.completada ? 'completada' : ''}`}>
+    <li className={`tarea ${tarea.completada ? 'completada' : ''}`}>
       <input
         type="checkbox"
         checked={tarea.completada}
         onChange={() => onToggle(tarea.id, !tarea.completada)}
-        className="tarea-checkbox"
+        style={{ marginRight: '10px', cursor: 'pointer' }}
       />
 
       {editando ? (
@@ -27,13 +27,12 @@ export function Tarea({ tarea, onToggle, onEliminar, onEditar }) {
           onChange={(e) => setNuevoTitulo(e.target.value)}
           onBlur={handleGuardar}
           onKeyDown={(e) => e.key === 'Enter' && handleGuardar()}
-          className="tarea-input-edit"
+          className="input-editar"
           autoFocus
         />
       ) : (
         <span
           onDoubleClick={() => setEditando(true)}
-          className="tarea-texto"
           title="Doble clic para editar"
         >
           {tarea.titulo}

@@ -70,27 +70,25 @@ export default function App() {
   const completadasCount = tareas.filter((t) => t.completada).length;
 
   return (
-    <div className="app-container">
+    <div className="contenedor">
       <h1>Lista de Tareas</h1>
 
-      <p className="contador-tareas">
+      {/* 🥉 Reto: Contador */}
+      <p className="estado">
         {completadasCount} de {tareas.length} tareas completadas
       </p>
 
-      <form onSubmit={agregarTarea} className="tarea-form">
+      <form onSubmit={agregarTarea} className="formulario">
         <input
           type="text"
           value={nuevoTexto}
           onChange={(e) => setNuevoTexto(e.target.value)}
           placeholder="Nueva tarea..."
-          className="tarea-input"
         />
-        <button type="submit" className="btn-agregar">
-          Agregar
-        </button>
+        <button type="submit">Agregar</button>
       </form>
 
-      <ul className="tarea-lista">
+      <ul className="lista">
         {tareas.map((t) => (
           <Tarea
             key={t.id}
@@ -102,8 +100,9 @@ export default function App() {
         ))}
       </ul>
 
+      {/* 🥈 Reto: Botón Eliminar completadas */}
       {completadasCount > 0 && (
-        <button onClick={eliminarCompletadas} className="btn-eliminar-completadas">
+        <button onClick={eliminarCompletadas} className="btn-completadas">
           Eliminar completadas
         </button>
       )}

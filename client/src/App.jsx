@@ -3,7 +3,7 @@ import { Tarea } from './components/Tarea';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api/tareas';
 
-export function App() {
+export default function App() {
   const [tareas, setTareas] = useState([]);
   const [nuevoTexto, setNuevoTexto] = useState('');
 

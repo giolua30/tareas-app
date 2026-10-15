@@ -2,10 +2,14 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+
+// Permitir peticiones desde tu frontend en Vercel o desde cualquier origen
+const CLIENTE_URL = process.env.CLIENTE_URL || "*";
+app.use(cors({ origin: CLIENTE_URL }));
+
 app.use(express.json());
 
-// Datos en memoria (luego los cambias por una base de datos)
+// Datos en memoria
 let tareas = [
   { id: 1, titulo: "Aprender React", completada: false },
   { id: 2, titulo: "Conectar con Node.js", completada: false },
@@ -28,11 +32,20 @@ app.post("/api/tareas", (req, res) => {
   res.status(201).json(nueva);
 });
 
-// PUT - Marcar/desmarcar como completada
+// PUT - Actualizar título o estado de una tarea (Soporta Reto 🥇)
 app.put("/api/tareas/:id", (req, res) => {
   const tarea = tareas.find((t) => t.id === Number(req.params.id));
   if (!tarea) return res.status(404).json({ error: "Tarea no encontrada" });
-  tarea.completada = req.body.completada ?? !tarea.completada;
+
+  const { titulo, completada } = req.body;
+
+  if (titulo !== undefined && titulo.trim() !== "") {
+    tarea.titulo = titulo.trim();
+  }
+  if (completada !== undefined) {
+    tarea.completada = completada;
+  }
+
   res.json(tarea);
 });
 
@@ -44,6 +57,7 @@ app.delete("/api/tareas/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(3001, () => {
-  console.log("API corriendo en http://localhost:3001");
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.logs(`API corriendo en el puerto ${PORT}`);
 });
